@@ -7,9 +7,10 @@ public class NguoiDTO {
     private String SDT;
     private String DiaChi;
 
-public NguoiDTO(String Ma, String HoTen, String SDT, String DiaChi) {
+public NguoiDTO(String Ma, String HoTen, String GioiTinh, String SDT, String DiaChi) {
         this.Ma = Ma;
         this.HoTen = HoTen;
+        this.GioiTinh = GioiTinh;
         this.SDT = SDT;
         this.DiaChi = DiaChi;
     }    
