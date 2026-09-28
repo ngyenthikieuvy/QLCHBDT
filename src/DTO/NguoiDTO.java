@@ -3,6 +3,7 @@ package DTO;
 public class NguoiDTO {
     private String Ma;
     private String HoTen;
+    private String GioiTinh;
     private String SDT;
     private String DiaChi;
 
@@ -32,6 +33,14 @@ public NguoiDTO() {
         this.HoTen = HoTen;
     }
 
+    public String getGioiTinh() {
+        return GioiTinh;
+    }
+
+    public void setGioiTinh(String GioiTinh) {
+        this.GioiTinh = GioiTinh;
+    }
+    
     public String getSDT() {
         return SDT;
     }

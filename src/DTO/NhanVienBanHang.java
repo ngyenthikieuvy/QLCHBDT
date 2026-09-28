@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package DTO;
 
 public class NhanVienBanHang extends NhanVienDTO {
@@ -23,11 +20,5 @@ public class NhanVienBanHang extends NhanVienDTO {
     public void setHoaHong(double HoaHong) {
         this.HoaHong = HoaHong;
     }
-
-    public NhanVienBanHang() { super(); }
-
-    public void TuVanSP() { /* Code tư vấn */ }
-    public Double TinhHoaHong() { return DoanhSo * HoaHong; }
-
     
 }

@@ -14,9 +14,6 @@ public class NhanVienDTO extends NguoiDTO {
         super(); 
     }
 
-    public Double TinhLuong() { return 0.0; }
-    public Double Tinhuudai() { return 0.0; }
-
     public Double getLuong() {
         return Luong;
     }
