@@ -45,11 +45,11 @@ public class Voucher {
     }
 
     public void hienthithongtin() {
-        System.out.println("Mã Voucher: " + MaVC + " | Tên: " + TenVC 
-                + " | Đơn tối thiểu: " + GiaToiThieu 
-                + " | Giảm tối đa: " + GiaToiDa 
-                + " | Số lượng: " + SoLuong 
-                + " | Trạng thái: " + Trangthai);
+        System.out.println("Ma Voucher: " + MaVC + " | Ten: " + TenVC
+            + " | Don toi thieu: " + GiaToiThieu
+            + " | Giam toi da: " + GiaToiDa
+            + " | So luong: " + SoLuong
+            + " | Trang thai: " + Trangthai);
     }
 
     public String getMaVC() { return MaVC; }

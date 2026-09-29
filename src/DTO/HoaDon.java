@@ -93,26 +93,26 @@ public class HoaDon {
     }
 
     public void Hienthihoadon() {
-        System.out.println("================ HÓA ĐƠN ================");
-        System.out.println("Mã HD: " + MaHD);
-        System.out.println("Ngày: " + Ngay);
-        System.out.println("Nhân viên: " + (nhanvien != null ? nhanvien.getHoTen() : "N/A"));
-        System.out.println("Khách hàng: " + (khachhang != null ? khachhang.getHoTen() : "N/A"));
+        System.out.println("================ HOA DON ================");
+        System.out.println("Ma HD: " + MaHD);
+        System.out.println("Ngay: " + Ngay);
+        System.out.println("Nhan vien: " + (nhanvien != null ? nhanvien.getHoTen() : "N/A"));
+        System.out.println("Khach hang: " + (khachhang != null ? khachhang.getHoTen() : "N/A"));
         if (Voucher != null) {
             System.out.println("Voucher: " + Voucher.getTenVC());
         }
         System.out.println("-----------------------------------------");
-        System.out.println("DANH SÁCH SẢN PHẨM MUA:");
+        System.out.println("DANH SACH SAN PHAM MUA:");
         for (ChiTietHoaDon ct : dsChiTiet) {
             if (ct != null) {
                 ct.Hienthichitiet();
             }
         }
         System.out.println("-----------------------------------------");
-        System.out.printf("Tổng tiền hàng: %.2f VNĐ%n", Tinhtongtien());
-        System.out.printf("Giảm giá:       -%.2f VNĐ%n", TinhGiaGiam());
-        System.out.printf("THANH TOÁN:     %.2f VNĐ%n", tinhThanhTien());
-        System.out.println("Trạng thái: " + TrangThai);
+        System.out.printf("Tong tien hang: %.2f VND%n", Tinhtongtien());
+        System.out.printf("Giam gia:       -%.2f VND%n", TinhGiaGiam());
+        System.out.printf("THANH TOAN:     %.2f VND%n", tinhThanhTien());
+        System.out.println("Trang thai: " + TrangThai);
         System.out.println("=========================================");
     }
 

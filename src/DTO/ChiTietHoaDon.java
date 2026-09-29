@@ -21,7 +21,7 @@ public class ChiTietHoaDon {
 
     public void Hienthichitiet() {
         String tenSP = (SP != null) ? SP.getTenSP() : "N/A";
-        System.out.printf("Sản phẩm: %-15s | Số lượng: %-3d | Đơn giá: %-10.2f | Thành tiền: %-10.2f%n",
+        System.out.printf("San pham: %-15s | So luong: %-3d | Don gia: %-10.2f | Thanh tien: %-10.2f%n",
                 tenSP, SoLuong, dongia, TinhThanhtien());
     }
 
