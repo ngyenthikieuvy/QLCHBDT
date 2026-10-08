@@ -85,4 +85,46 @@ GO
 USE [QLBanDienThoai]
 GO
 
+/******Object: table SanPham*******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[SanPham](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[TenSP] [nvarchar](255) NOT NULL,
+	[ThuongHieu] [nvarchar](255) NULL,
+	[Xuatxu] [nvarchar](50) NULL,
+	[MaLoai] [int] NULL,
+	[GiaBan] [decimal](18, 2) NULL,
+	[SoLuong] [int] NULL,
+	[HinhAnh] [nvarchar](255) NULL,
+	[MoTa] [nvarchar](max) NULL,
+	[maNCC] [int] NULL,
+	[TrangThai] [bit] NULL,
+	[MaSP]  AS ('SP'+right('000'+CONVERT([varchar](3),[ID]),(3))) PERSISTED,
+PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
 
+/******Object: table CTSanPham*******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[CTSanPham](
+	[MaCTSP] [int] IDENTITY(1,1) NOT NULL,
+	[ID] [int] NOT NULL,
+	[ChatLieuVo] [nvarchar](50) NULL,
+	[ChatLieuDay] [nvarchar](50) NULL,
+	[BaoHanh] [nvarchar](100) NULL,
+	[TrongLuong] [decimal](6, 2) NULL,
+ CONSTRAINT [PK__CTSanPha__1E4FCECD7161CA13] PRIMARY KEY CLUSTERED 
+(
+	[MaCTSP] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
