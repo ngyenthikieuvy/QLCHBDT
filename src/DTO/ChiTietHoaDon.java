@@ -1,37 +1,72 @@
 package DTO;
 
-//Đang đợi class SanPham, sẽ fix lại sau ạ
-public class ChiTietHoaDon {
-    private SanPham SP;
-    private int SoLuong;
-    private double dongia;
-
-    public ChiTietHoaDon() {
-    }
-
-    public ChiTietHoaDon(SanPham SP, int SoLuong, double dongia) {
-        this.SP = SP;
-        this.SoLuong = SoLuong;
-        this.dongia = dongia;
-    }
-
-    public double TinhThanhtien() {
-        return this.SoLuong * this.dongia;
-    }
-
-    public void Hienthichitiet() {
-        String tenSP = (SP != null) ? SP.getTenSP() : "N/A";
-        System.out.printf("San pham: %-15s | So luong: %-3d | Don gia: %-10.2f | Thanh tien: %-10.2f%n",
-                tenSP, SoLuong, dongia, TinhThanhtien());
-    }
-
-
-    public SanPham getSP() { return SP; }
-    public void setSP(SanPham SP) { this.SP = SP; }
-
-    public int getSoLuong() { return SoLuong; }
-    public void setSoLuong(int SoLuong) { this.SoLuong = SoLuong; }
-
-    public double getDongia() { return dongia; }
-    public void setDongia(double dongia) { this.dongia = dongia; }
+public class ChiTietHoaDon{
+    private int maHD;
+    private int maSP;
+    private int soLuong;
+    private double donGia;
+    private double thanhTien;
+    private int ID;
+    
+public ChiTietHoaDon {
 }
+    
+public CTHoaDon(int maHD, int soLuong, double donGia, double thanhTien, int ID) {
+        this.maHD = maHD;
+        this.maSP =maSP;
+        this.soLuong = soLuong;
+        this.donGia = donGia;
+        this.thanhTien = thanhTien;
+        this.ID = ID;
+}
+
+public int getmaHD() {
+    return maHD;
+    }
+    
+public void setmaHD() {
+    this.maHD = maHD;
+    }
+    
+public int getmaSP() {
+    return maSP;
+    }
+    
+public void setmaSP() {
+    this.maSP = maSP;
+    }
+public int getSoLuong() {
+        return soLuong;
+    }
+public void setSoLuong(int soLuong) {
+        this.soLuong = soLuong;
+    }
+
+public double getDonGia() {
+        return donGia;
+    }
+
+public void setDonGia(double donGia) {
+        this.donGia = donGia;
+    }
+
+public double getThanhTien() {
+        return thanhTien;
+    }
+
+public void setThanhTien(double thanhTien) {
+        this.thanhTien = thanhTien;
+    }
+
+public int getID() {
+        return ID;
+    }
+
+public void setID(int ID) {
+        this.ID = ID;
+    } 
+}
+
+
+
+
