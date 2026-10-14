@@ -1,145 +1,132 @@
+
 package DTO;
 
-//Đang đợi class SanPham, sẽ fix lại sau ạ
-import java.util.Arrays;
 import java.util.Date;
 
 public class HoaDon {
-    private String MaHD;
-    private Date Ngay;
-    private NhanVienDTO nhanvien;
-    private KhachHangDTO khachhang;
-    private Double Giamgia;
-    private Voucher Voucher;
-    private String TrangThai;
-
-    // Mảng chi tiết hóa đơn
-    private ChiTietHoaDon[] dsChiTiet;
-
-    // Constructors
+    private int maHD;
+    private int maKH;
+    private String tenKH;
+    private int maNV;
+    private String tenNV;
+    private Date ngayLap;
+    private double tongTien;
+    private int maGG;
+    private String ghiChu;
+    private String trangThai;
+    
     public HoaDon() {
-        this.Ngay = new Date();
-        this.Giamgia = 0.0;
-        this.dsChiTiet = new ChiTietHoaDon[0]; 
     }
-
-    public HoaDon(String MaHD, Date Ngay, NhanVienDTO nhanvien, KhachHangDTO khachhang, 
-                  Double Giamgia, Voucher Voucher, String TrangThai, ChiTietHoaDon[] dsChiTiet) {
-        this.MaHD = MaHD;
-        this.Ngay = Ngay;
-        this.nhanvien = nhanvien;
-        this.khachhang = khachhang;
-        this.Giamgia = Giamgia;
-        this.Voucher = Voucher;
-        this.TrangThai = TrangThai;
-        this.dsChiTiet = (dsChiTiet != null) ? dsChiTiet : new ChiTietHoaDon[0];
-    }
-
-    // Thêm sản phẩm vào chi tiết hóa đơn
-    public void Them(ChiTietHoaDon ct) {
-        if (ct == null) return;
-        int n = dsChiTiet.length;
-        dsChiTiet = Arrays.copyOf(dsChiTiet, n + 1);
-        dsChiTiet[n] = ct;
-        TinhGiaGiam(); 
-    }
-
-    // Xóa sản phẩm khỏi chi tiết hóa đơn theo mã SP
-    public void Xoa(String maSP) {
-        int index = -1;
-        for (int i = 0; i < dsChiTiet.length; i++) {
-            if (dsChiTiet[i].getSP() != null && 
-                dsChiTiet[i].getSP().getMaSP().equalsIgnoreCase(maSP)) {
-                index = i;
-                break;
-            }
-        }
-
-        if (index != -1) {
-            ChiTietHoaDon[] newArray = new ChiTietHoaDon[dsChiTiet.length - 1];
-            for (int i = 0, k = 0; i < dsChiTiet.length; i++) {
-                if (i == index) continue;
-                newArray[k++] = dsChiTiet[i];
-            }
-            dsChiTiet = newArray;
-            TinhGiaGiam();
-        }
-    }
-
     
-    public Double Tinhtongtien() {
-        Double tong = 0.0;
-        for (ChiTietHoaDon ct : dsChiTiet) {
-            if (ct != null) {
-                tong += ct.TinhThanhtien();
-            }
-        }
-        return tong;
+    // MaHD duoc SQL Server tu sinh
+    public HoaDon(int maKH, int maNV, Date ngayLap,
+                  double tongTien, int maGG,
+                  String ghiChu) {
+
+        this.maKH = maKH;
+        this.maNV = maNV;
+        this.ngayLap = ngayLap;
+        this.tongTien = tongTien;
+        this.maGG = maGG;
+        this.ghiChu = ghiChu;
     }
 
-    
-    public Double TinhGiaGiam() {
-        if (this.Voucher != null) {
-            this.Giamgia = this.Voucher.Tinhtiengiam(Tinhtongtien());
-        } else {
-            this.Giamgia = 0.0;
-        }
-        return this.Giamgia;
+    // Constructor su dung khi lay du lieu tu database
+    public HoaDon(int maHD, int maKH, String tenKH,
+                  int maNV, String tenNV,
+                  Date ngayLap, double tongTien,
+                  int maGG, String ghiChu,
+                  String trangThai) {
+
+        this.maHD = maHD;
+        this.maKH = maKH;
+        this.tenKH = tenKH;
+        this.maNV = maNV;
+        this.tenNV = tenNV;
+        this.ngayLap = ngayLap;
+        this.tongTien = tongTien;
+        this.maGG = maGG;
+        this.ghiChu = ghiChu;
+        this.trangThai = trangThai;
     }
 
-
-    public Double tinhThanhTien() {
-        return Tinhtongtien() - TinhGiaGiam();
+    public int getMaHD() {
+        return maHD;
     }
 
-    public void Hienthihoadon() {
-        System.out.println("================ HOA DON ================");
-        System.out.println("Ma HD: " + MaHD);
-        System.out.println("Ngay: " + Ngay);
-        System.out.println("Nhan vien: " + (nhanvien != null ? nhanvien.getHoTen() : "N/A"));
-        System.out.println("Khach hang: " + (khachhang != null ? khachhang.getHoTen() : "N/A"));
-        if (Voucher != null) {
-            System.out.println("Voucher: " + Voucher.getTenVC());
-        }
-        System.out.println("-----------------------------------------");
-        System.out.println("DANH SACH SAN PHAM MUA:");
-        for (ChiTietHoaDon ct : dsChiTiet) {
-            if (ct != null) {
-                ct.Hienthichitiet();
-            }
-        }
-        System.out.println("-----------------------------------------");
-        System.out.printf("Tong tien hang: %.2f VND%n", Tinhtongtien());
-        System.out.printf("Giam gia:       -%.2f VND%n", TinhGiaGiam());
-        System.out.printf("THANH TOAN:     %.2f VND%n", tinhThanhTien());
-        System.out.println("Trang thai: " + TrangThai);
-        System.out.println("=========================================");
+    public void setMaHD(int maHD) {
+        this.maHD = maHD;
     }
 
-    public String getMaHD() { return MaHD; }
-    public void setMaHD(String maHD) { MaHD = maHD; }
-
-    public Date getNgay() { return Ngay; }
-    public void setNgay(Date ngay) { Ngay = ngay; }
-
-    public NhanVienDTO getNhanvien() { return nhanvien; }
-    public void setNhanvien(NhanVienDTO nhanvien) { this.nhanvien = nhanvien; }
-
-    public KhachHangDTO getKhachhang() { return khachhang; }
-    public void setKhachhang(KhachHangDTO khachhang) { this.khachhang = khachhang; }
-
-    public Double getGiamgia() { return Giamgia; }
-    public void setGiamgia(Double giamgia) { Giamgia = giamgia; }
-
-    public Voucher getVoucher() { return Voucher; }
-    public void setVoucher(Voucher voucher) { 
-        this.Voucher = voucher; 
-        TinhGiaGiam(); 
+    public int getMaKH() {
+        return maKH;
     }
 
-    public String getTrangThai() { return TrangThai; }
-    public void setTrangThai(String trangThai) { TrangThai = trangThai; }
+    public void setMaKH(int maKH) {
+        this.maKH = maKH;
+    }
 
-    public ChiTietHoaDon[] getDsChiTiet() { return dsChiTiet; }
-    public void setDsChiTiet(ChiTietHoaDon[] dsChiTiet) { this.dsChiTiet = dsChiTiet; }
+    public String getTenKH() {
+        return tenKH;
+    }
+
+    public void setTenKH(String tenKH) {
+        this.tenKH = tenKH;
+    }
+
+    public int getMaNV() {
+        return maNV;
+    }
+
+    public void setMaNV(int maNV) {
+        this.maNV = maNV;
+    }
+
+    public String getTenNV() {
+        return tenNV;
+    }
+
+    public void setTenNV(String tenNV) {
+        this.tenNV = tenNV;
+    }
+
+    public Date getNgayLap() {
+        return ngayLap;
+    }
+
+    public void setNgayLap(Date ngayLap) {
+        this.ngayLap = ngayLap;
+    }
+
+    public double getTongTien() {
+        return tongTien;
+    }
+
+    public void setTongTien(double tongTien) {
+        this.tongTien = tongTien;
+    }
+
+    public int getMaGG() {
+        return maGG;
+    }
+
+    public void setMaGG(int maGG) {
+        this.maGG = maGG;
+    }
+
+    public String getGhiChu() {
+        return ghiChu;
+    }
+
+    public void setGhiChu(String ghiChu) {
+        this.ghiChu = ghiChu;
+    }
+
+    public String getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(String trangThai) {
+        this.trangThai = trangThai;
+    }
 }
