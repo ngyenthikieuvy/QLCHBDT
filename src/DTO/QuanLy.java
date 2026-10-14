@@ -1,6 +1,6 @@
 package DTO;
 
-public class QuanLyDTO extends NhanVienDTO {
+public class QuanLy extends NhanVien {
     private Double PhuCap;
     private String QuyenHan;
 
@@ -20,6 +20,6 @@ public class QuanLyDTO extends NhanVienDTO {
         this.QuyenHan = QuyenHan;
     }
 
-    public QuanLyDTO() { super(); }
+    public QuanLy() { super(); }
     
 }

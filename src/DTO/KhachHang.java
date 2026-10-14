@@ -1,9 +1,9 @@
 package DTO;
 
-public class KhachHangDTO extends NguoiDTO { 
+public class KhachHang extends Nguoi { 
     private int DiemTichLuy;
 
-    public KhachHangDTO() {
+    public KhachHang() {
         super(); 
     }
 

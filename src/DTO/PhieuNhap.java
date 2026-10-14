@@ -12,8 +12,8 @@ public class PhieuNhap{
     private ArrayList<ChiTietPhieuNhap> danhSachChiTiet;
     
     public PhieuNhap(){
-        this.danhSachChiTiet = new ArrayList<ChiTietPhieuNhap>;
-        this.nhayNhap = LocalDate.now();
+        this.danhSachChiTiet = new ArrayList<ChiTietPhieuNhap>();
+        this.ngayNhap = LocalDate.now();
     }
     
     public PhieuNhap(String maPhieuNhap, String maNhaCungCap, String maNhanVien, LocalDate ngayNhap, double TongTien, ArrayList<ChiTietPhieuNhap> danhSachChiTiet){
@@ -61,8 +61,8 @@ public class PhieuNhap{
         return tongTien;
     }
 
-    public void setTongTien(double tongTien) {
-        this.tongTien = tongTien;
+    public void setTongTien(double TongTien) {
+        this.TongTien = TongTien;
     }
     
     public ArrayList<ChiTietPhieuNhap> getDanhSachChiTiet() {

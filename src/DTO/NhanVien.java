@@ -2,14 +2,14 @@ package DTO;
 
 import java.util.Date;
 
-public class NhanVienDTO extends NguoiDTO {
+public class NhanVien extends Nguoi {
     private Double Luong;
     private String Calam;
     private Date Ngayvaolam;
     private String MaTheNV;
     private Double PhanTramuudai;
 
-    public NhanVienDTO() 
+    public NhanVien() 
     {
         super(); 
     }

@@ -1,13 +1,13 @@
 package DTO;
 
-public class NguoiDTO {
+public class Nguoi {
     private String Ma;
     private String HoTen;
     private String GioiTinh;
     private String SDT;
     private String DiaChi;
 
-public NguoiDTO(String Ma, String HoTen, String GioiTinh, String SDT, String DiaChi) {
+public Nguoi(String Ma, String HoTen, String GioiTinh, String SDT, String DiaChi) {
         this.Ma = Ma;
         this.HoTen = HoTen;
         this.GioiTinh = GioiTinh;
@@ -15,7 +15,7 @@ public NguoiDTO(String Ma, String HoTen, String GioiTinh, String SDT, String Dia
         this.DiaChi = DiaChi;
     }    
 
-public NguoiDTO() {
+public Nguoi() {
     }
 
     public String getMa() {

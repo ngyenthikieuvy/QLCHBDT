@@ -1,9 +1,9 @@
 package DAO;
 
-import DTO.KhachHangDTO;
+import DTO.KhachHang;
 
-public class KhachHangDAO {
-    public boolean themKhachHang(KhachHangDTO kh) {
+public class KhachHang {
+    public boolean themKhachHang(KhachHang kh) {
         String sql = "INSERT INTO KhachHang (HoTen, GioiTinh, SDT, DiaChi) VALUES (?, ?, ?, ?)";
         
         int rows = DataProvider.executeUpdate(sql,
@@ -17,7 +17,7 @@ public class KhachHangDAO {
     }
 
 
-public boolean suaKhachHang(KhachHangDTO kh) {
+public boolean suaKhachHang(KhachHang kh) {
         String sql = "UPDATE KhachHang SET HoTen=?, GioiTinh = ?, SoDienThoai = ?, DiaChi = ? WHERE Ma = ?";
         
         int rows = DataProvider.executeUpdate(sql,
