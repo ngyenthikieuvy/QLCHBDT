@@ -1,6 +1,6 @@
 package DTO;
 
-import java.util.LocalDate;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class PhieuNhap{
@@ -58,7 +58,7 @@ public class PhieuNhap{
     }
     
     public double getTongTien() {
-        return tongTien;
+        return TongTien;
     }
 
     public void setTongTien(double TongTien) {
