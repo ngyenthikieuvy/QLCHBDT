@@ -128,3 +128,62 @@ CREATE TABLE [dbo].[CTSanPham](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
+/****** Object:  Table [dbo].[HoaDon]******/
+CREATE TABLE [dbo].[HoaDon](
+	[MaHD] [int] IDENTITY(1,1) NOT NULL,
+	[MaNV] [int] NOT NULL,
+	[MaKH] [int] NULL,
+	[NgayLap] [date] NOT NULL DEFAUTL GETDATE(),
+    [TongTien] BIGINT NOT NULL DEFAULT 0,
+	[MaGG] [int] NULL,
+	[GhiChu] [nvarchar](max) NULL,
+	[TrangThai] [varchar](50) NOT NULL
+	DEFAULT N'Chưa thanh toán',
+	
+CONSTRAINT [PK__HoaDon__2725A6E098A4995E] PRIMARY KEY CLUSTERED ( [MaHD] ASC )
+
+CONSTRAINT [CK_HoaDon_TrangThai]
+        CHECK (
+            TrangThai IN (
+                N'Chưa thanh toán',
+                N'Đã thanh toán',
+                N'Đã hủy'
+            )
+        )
+CONSTRAINT [FK__HoaDon__MaGG__5AEE82B9] FOREIGN KEY([MaGG])
+REFERENCES [dbo].[GiamGia] ([MaGG])
+
+CONSTRAINT [FK__HoaDon__MaKH__5BE2A6F2] FOREIGN KEY([MaKH])
+REFERENCES [dbo].[KhachHang] ([MaKH])
+
+CONSTRAINT [FK__HoaDon__MaNV__5CD6CB2B] FOREIGN KEY([MaNV])
+REFERENCES [dbo].[NhanVien] ([MaNV])
+)
+/****** Object:  Table [dbo].[CTHoaDon]******/	
+CREATE TABLE [dbo].[CTHoaDon] (
+    [MaCTHD] INT IDENTITY(1,1) NOT NULL,
+    [MaHD] INT NOT NULL,
+    [SoLuong] INT NOT NULL,
+    [GiaBan] INT NOT NULL,
+    [ID] INT NOT NULL,
+    [ThanhTien] AS (
+    CONVERT(BIGINT, SoLuong) * GiaBan
+) PERSISTED,
+CONSTRAINT PK_CTHoaDon
+    PRIMARY KEY CLUSTERED (MaCTHD ASC),
+
+CONSTRAINT CK_CTHoaDon_SoLuong
+CHECK (SoLuong > 0),
+
+CONSTRAINT CK_CTHoaDon_GiaBan
+CHECK (GiaBan >= 0)
+	
+CONSTRAINT [UQ_CTHoaDon_MaHD_ID]
+UNIQUE (MaHD, ID);
+	
+CONSTRAINT [FK_CTHoaDon_SanPham] FOREIGN KEY (ID)
+REFERENCES [dbo].[SanPham](ID)
+
+CONSTRAINT [FK_CTHoaDon_HoaDon] FOREIGN KEY (MaHD)
+REFERENCES [dbo].[HoaDon](MaHD)
+)
