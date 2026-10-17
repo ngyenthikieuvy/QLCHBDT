@@ -1,6 +1,6 @@
 package DTO;
 
-public class ChiTietHoaDon{
+public class CTHoaDon{
     private int maHD;
     private int maSP;
     private int soLuong;
@@ -8,7 +8,7 @@ public class ChiTietHoaDon{
     private double thanhTien;
     private int ID;
     
-public ChiTietHoaDon {
+public CTHoaDon {
 }
     
 public CTHoaDon(int maHD, int soLuong, double donGia, double thanhTien, int ID) {
