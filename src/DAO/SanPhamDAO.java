@@ -96,7 +96,7 @@ public class SanPhamDAO {
             return false;
         }
     }
-    public boolean xoa(int ID){
+    public boolean xoa(int MaSP){
         String sql="DELETE FROM dbo.SanPham WHERE MaSP=?";
 
         try (Connection conn = DBConnection.getConnection();
@@ -119,10 +119,8 @@ public class SanPhamDAO {
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            // Tạo chuỗi tìm kiếm chứa % để dùng với LIKE
             String tk = "%" + tukhoa + "%";
 
-            // Truyền biến tk vào cả 2 dấu hỏi (?)
             ps.setString(1, tk);
             ps.setString(2, tk);
 
@@ -147,7 +145,6 @@ public class SanPhamDAO {
         } catch (SQLException e) {
             e.printStackTrace(); 
         }
-
         return danhsach; 
     }
 
