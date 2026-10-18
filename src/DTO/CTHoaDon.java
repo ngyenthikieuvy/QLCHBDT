@@ -11,7 +11,7 @@ public class CTHoaDon{
 public CTHoaDon {
 }
     
-public CTHoaDon(int maHD, int soLuong, double donGia, double thanhTien, int ID) {
+public CTHoaDon(int maHD,int maSP, int soLuong, double donGia, double thanhTien, int ID) {
         this.maHD = maHD;
         this.maSP =maSP;
         this.soLuong = soLuong;
