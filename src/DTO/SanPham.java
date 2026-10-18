@@ -5,6 +5,8 @@ public class SanPham {
     private String ThuongHieu;
     private String Xuatxu;
     private Integer MaLoai;
+    private String Mausac;
+    private String DungLuong;
     private Double GiaBan;
     private int SoLuong;
     private String MoTa;
@@ -15,7 +17,7 @@ public class SanPham {
     public SanPham(){
     }
     public SanPham(int ID, String TenSP, String ThuongHieu,
-                      String Xuatxu, Integer MaLoai, Double GiaBan,
+                      String Xuatxu, Integer MaLoai, String Mausac, String DungLuong, Double GiaBan,
                       int SoLuong, String MoTa,
                       Integer maNCC, Boolean TrangThai, String MaSP) {
         this.ID = ID;
@@ -23,6 +25,8 @@ public class SanPham {
         this.ThuongHieu = ThuongHieu;
         this.Xuatxu = Xuatxu;
         this.MaLoai = MaLoai;
+        this.Mausac = Mausac;
+        this.DungLuong = DungLuong;
         this.GiaBan = GiaBan;
         this.SoLuong = SoLuong;
         this.MoTa = MoTa;
@@ -69,7 +73,21 @@ public class SanPham {
     public void setMaLoai(Integer MaLoai) {
         this.MaLoai = MaLoai;
     }
+    
+    public String getMausac(){
+        return Mausac;
+    }
+    public void setMausac(String Mausac){
+        this.Mausac = Mausac;
+    }
 
+    public String getDungLuong(){
+        return DungLuong;
+    }
+    public void setDungLuong(String DungLuong){
+        this.DungLuong = DungLuong;
+    }
+    
     public double getGiaBan() {
         return GiaBan;
     }
