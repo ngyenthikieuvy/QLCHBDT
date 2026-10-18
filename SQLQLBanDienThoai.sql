@@ -1,5 +1,5 @@
 USE [QuanLiBanDienThoai]
-//* chức vụ**//
+/* Chức vụ */
 CREATE TABLE dbo.ChucVu (
     MaCV INT IDENTITY(1,1) PRIMARY KEY,
     TenCV NVARCHAR(100) NOT NULL
@@ -18,7 +18,7 @@ VALUES
 (N'Nhân viên kế toán'),
 (N'Nhân viên kho');
 
-//* Nhân viên*/
+/* Nhân viên*/
 CREATE TABLE dbo.NhanVien (
     MaNV INT IDENTITY(1,1) PRIMARY KEY,
     Ho NVARCHAR(50) NOT NULL,
@@ -521,6 +521,41 @@ INSERT INTO dbo.PhanQuyen (MaQuyen, TenQuyen) VALUES ('ADMIN', N'Quản trị vi
 INSERT INTO dbo.PhanQuyen (MaQuyen, TenQuyen) VALUES ('QL_NHANSU', N'Quản lý nhân sự');
 INSERT INTO dbo.PhanQuyen (MaQuyen, TenQuyen) VALUES ('QL_KHO', N'Quản lý kho');
 INSERT INTO dbo.PhanQuyen (MaQuyen, TenQuyen) VALUES ('QL_KINHDOANH', N'Quản lý kinh doanh');
+
+-- ADMIN: toàn bộ quyền
+UPDATE dbo.PhanQuyen SET
+    NS_XemDanhSach = 1, NS_Them = 1, NS_Sua = 1, NS_Xoa = 1, NS_DuyetNghi = 1,
+    NS_ThayDoiChucVu = 1, NS_TinhLuong = 1, NS_XemLuongCaNhan = 1, NS_InBangLuong = 1, NS_ChamCong = 1,
+    KHO_XemSanPham = 1, KHO_ThemSanPham = 1, KHO_SuaSanPham = 1, KHO_XoaSanPham = 1,
+    KHO_NhapHang = 1, KHO_QuanLyNCC = 1, KHO_BaoCaoTonKho = 1,
+    BH_LapPhieuXuat = 1, BH_ThongKeDoanhThu = 1, BH_ThongKeLoiNhuan = 1,
+    PQ_QuanLyPhanQuyen = 1, ADMIN_BaoCaoTongHop = 1,
+    QLBanHang = 1, QLNhapHang = 1, QLNhanVien = 1, QLSanPham = 1,
+    QLKhachHang = 1, QLKhuyenMai = 1, QLThongKe = 1
+WHERE MaQuyen = 'ADMIN';
+
+-- QL_NHANSU: nhân sự, lương, chấm công
+UPDATE dbo.PhanQuyen SET
+    NS_XemDanhSach = 1, NS_Them = 1, NS_Sua = 1, NS_Xoa = 1, NS_DuyetNghi = 1,
+    NS_ThayDoiChucVu = 1, NS_TinhLuong = 1, NS_XemLuongCaNhan = 1, NS_InBangLuong = 1, NS_ChamCong = 1,
+    QLNhanVien = 1
+WHERE MaQuyen = 'QL_NHANSU';
+
+-- QL_KHO: sản phẩm, nhập hàng, nhà cung cấp, tồn kho
+UPDATE dbo.PhanQuyen SET
+    NS_XemLuongCaNhan = 1, NS_ChamCong = 1,
+    KHO_XemSanPham = 1, KHO_ThemSanPham = 1, KHO_SuaSanPham = 1, KHO_XoaSanPham = 1,
+    KHO_NhapHang = 1, KHO_QuanLyNCC = 1, KHO_BaoCaoTonKho = 1,
+    QLNhapHang = 1, QLSanPham = 1
+WHERE MaQuyen = 'QL_KHO';
+
+-- QL_KINHDOANH: bán hàng, khách hàng, khuyến mãi, thống kê
+UPDATE dbo.PhanQuyen SET
+    NS_XemLuongCaNhan = 1, NS_ChamCong = 1,
+    KHO_XemSanPham = 1,
+    BH_LapPhieuXuat = 1, BH_ThongKeDoanhThu = 1, BH_ThongKeLoiNhuan = 1,
+    QLBanHang = 1, QLKhachHang = 1, QLKhuyenMai = 1, QLThongKe = 1
+WHERE MaQuyen = 'QL_KINHDOANH';
 
 /*Tài Khoản*/
 

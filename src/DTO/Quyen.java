@@ -1,22 +1,22 @@
 package DTO;
 
 public class Quyen {
-    private int maQuyen;
+    private String maQuyen;
     private String tenQuyen;
 
     public Quyen() {
     }
 
-    public Quyen(int maQuyen, String tenQuyen) {
+    public Quyen(String maQuyen, String tenQuyen) {
         this.maQuyen = maQuyen;
         this.tenQuyen = tenQuyen;
     }
 
-    public int getMaQuyen() {
+    public String getMaQuyen() {
         return maQuyen;
     }
 
-    public void setMaQuyen(int maQuyen) {
+    public void setMaQuyen(String maQuyen) {
         this.maQuyen = maQuyen;
     }
 

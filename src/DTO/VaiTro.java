@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class VaiTro {
-    private int maVaiTro;
+    private String maVaiTro;
     private String tenVaiTro;
     private List<Quyen> danhSachQuyen; //Dung List de tao danh sach quyen cho vai tro
 
@@ -12,7 +12,7 @@ public class VaiTro {
         this.danhSachQuyen = new ArrayList<>();
     }
 
-    public VaiTro(int maVaiTro, String tenVaiTro, List<Quyen> danhSachQuyen) {
+    public VaiTro(String maVaiTro, String tenVaiTro, List<Quyen> danhSachQuyen) {
         this.maVaiTro = maVaiTro;
         this.tenVaiTro = tenVaiTro;
         if (danhSachQuyen == null) {
@@ -22,11 +22,11 @@ public class VaiTro {
         }
     }
 
-    public int getMaVaiTro() {
+    public String getMaVaiTro() {
         return maVaiTro;
     }
 
-    public void setMaVaiTro(int maVaiTro) {
+    public void setMaVaiTro(String maVaiTro) {
         this.maVaiTro = maVaiTro;
     }
 
