@@ -15,7 +15,7 @@ public class SanPhamDAO {
         ArrayList<SanPham> danhsach = new ArrayList<>();
         String sql = "SELECT * FROM dbo.SanPham";
 
-        // Sử dụng try-with-resources để tự động đóng kết nối, PreparedStatement và ResultSet
+       
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
@@ -113,7 +113,7 @@ public class SanPhamDAO {
     public ArrayList<SanPham> timkiem(String tukhoa) {
         ArrayList<SanPham> danhsach = new ArrayList<>();
 
-        // Sửa lại điều kiện WHERE: Thường tìm theo MaSP và TenSP thay vì ID (vì ID là số)
+      
         String sql = "SELECT * FROM dbo.SanPham WHERE MaSP LIKE ? OR TenSP LIKE ?";
 
         try (Connection conn = DBConnection.getConnection();
@@ -136,7 +136,7 @@ public class SanPhamDAO {
                     sp.setMaLoai(rs.getInt("MaLoai"));
                     sp.setMauSac(rs.getString("MauSac"));
                     sp.setDungLuong(rs.getString("DungLuong"));
-                    sp.setGiaBan(rs.getDouble("GiaBan")); // Khuyên dùng getBigDecimal cho tiền tệ
+                    sp.setGiaBan(rs.getDouble("GiaBan"));
                     sp.setSoLuong(rs.getInt("SoLuong"));
                     sp.setMoTa(rs.getString("MoTa"));
 
@@ -145,10 +145,10 @@ public class SanPhamDAO {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace(); // Bắt lỗi SQL nếu có
+            e.printStackTrace(); 
         }
 
-        return danhsach; // Trả về danh sách kết quả tìm kiếm
+        return danhsach; 
     }
 
 }
