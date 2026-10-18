@@ -1,58 +1,65 @@
 package DTO;
-
-import java.util.Date;
-
+                
 public class NhanVien extends Nguoi {
-    private Double Luong;
-    private String Calam;
-    private Date Ngayvaolam;
-    private String MaTheNV;
-    private Double PhanTramuudai;
 
-    public NhanVien() 
-    {
-        super(); 
+    private String maCV;
+    private String maQuyen;
+    private boolean trangThai;
+    private String tenTaiKhoan;
+
+    public NhanVien() {
+        super();
     }
 
-    public Double getLuong() {
-        return Luong;
+    public NhanVien(int maNV, String ho, String ten, String gioiTinh, String soDienThoai, String maCV, String maQuyen, boolean trangThai, String tenTaiKhoan) {
+        super(maNV, ho, ten, gioiTinh, soDienThoai);
+        this.maCV = maCV;
+        this.maQuyen = maQuyen;
+        this.trangThai = trangThai;
+        this.tenTaiKhoan = tenTaiKhoan;
     }
 
-    public void setLuong(Double Luong) {
-        this.Luong = Luong;
+    public NhanVien(int maNV, String ho, String ten, String gioiTinh, String soDienThoai, String maCV, boolean trangThai, String tenTaiKhoan) {
+        super(maNV, ho, ten, gioiTinh, soDienThoai);
+        this.maCV = maCV;
+        this.trangThai = trangThai;
+        this.tenTaiKhoan = tenTaiKhoan;
     }
 
-    public String getCalam() {
-        return Calam;
+    public String getMaCV() {
+        return maCV;
     }
 
-    public void setCalam(String Calam) {
-        this.Calam = Calam;
+    public void setMaCV(String maCV) {
+        this.maCV = maCV;
     }
 
-    public Date getNgayvaolam() {
-        return Ngayvaolam;
+    public String getMaQuyen() {
+        return maQuyen;
     }
 
-    public void setNgayvaolam(Date Ngayvaolam) {
-        this.Ngayvaolam = Ngayvaolam;
+    public void setMaQuyen(String maQuyen) {
+        this.maQuyen = maQuyen;
     }
 
-    public String getMaTheNV() {
-        return MaTheNV;
+    public boolean isTrangThai() {
+        return trangThai;
     }
 
-    public void setMaTheNV(String MaTheNV) {
-        this.MaTheNV = MaTheNV;
+    public void setTrangThai(boolean trangThai) {
+        this.trangThai = trangThai;
     }
 
-    public Double getPhanTramuudai() {
-        return PhanTramuudai;
+    public String getTenTaiKhoan() {
+        return tenTaiKhoan;
     }
 
-    public void setPhanTramuudai(Double PhanTramuudai) {
-        this.PhanTramuudai = PhanTramuudai;
+    public void setTenTaiKhoan(String tenTaiKhoan) {
+        this.tenTaiKhoan = tenTaiKhoan;
     }
 
-    
+    public String getMaNV() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 }

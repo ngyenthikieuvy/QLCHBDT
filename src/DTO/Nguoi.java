@@ -1,60 +1,60 @@
 package DTO;
 
 public class Nguoi {
-    private String Ma;
-    private String HoTen;
-    private String GioiTinh;
-    private String SDT;
-    private String DiaChi;
-
-public Nguoi(String Ma, String HoTen, String GioiTinh, String SDT, String DiaChi) {
-        this.Ma = Ma;
-        this.HoTen = HoTen;
-        this.GioiTinh = GioiTinh;
-        this.SDT = SDT;
-        this.DiaChi = DiaChi;
-    }    
-
-public Nguoi() {
-    }
-
-    public String getMa() {
-        return Ma;
-    }
-
-    public void setMa(String Ma) {
-        this.Ma = Ma;
-    }
-
-    public String getHoTen() {
-        return HoTen;
-    }
-
-    public void setHoTen(String HoTen) {
-        this.HoTen = HoTen;
-    }
-
-    public String getGioiTinh() {
-        return GioiTinh;
-    }
-
-    public void setGioiTinh(String GioiTinh) {
-        this.GioiTinh = GioiTinh;
+    protected int ma;
+    protected String ho;
+    protected String ten;
+    protected String gioiTinh;
+    protected String soDienThoai;
+    
+    public Nguoi(int ma, String ho, String ten, String gioiTinh, String soDienThoai) {
+        this.ma = ma;
+        this.ho = ho;
+        this.ten = ten;
+        this.gioiTinh = gioiTinh;
+        this.soDienThoai = soDienThoai;
     }
     
-    public String getSDT() {
-        return SDT;
+    public Nguoi() {
+    }
+    
+    public int getMa() {
+        return ma;
     }
 
-    public void setSDT(String SDT) {
-        this.SDT = SDT;
+    public void setMa(int ma) {
+        this.ma = ma;
     }
 
-    public String getDiaChi() {
-        return DiaChi;
+    public String getHo() {
+        return ho;
     }
 
-    public void setDiaChi(String DiaChi) {
-        this.DiaChi = DiaChi;
+    public void setHo(String ho) {
+        this.ho = ho;
+    }
+
+    public String getTen() {
+        return ten;
+    }
+
+    public void setTen(String ten) {
+        this.ten = ten;
+    }
+    
+    public String getGioiTinh() {
+        return gioiTinh;
+    }
+
+    public void setGioiTinh(String gioiTinh) {
+        this.gioiTinh = gioiTinh;
+    }
+
+    public String getSoDienThoai() {
+        return soDienThoai;
+    }
+
+    public void setSoDienThoai(String soDienThoai) {
+        this.soDienThoai = soDienThoai;
     }
 }
