@@ -1,7 +1,7 @@
 package DAO;
 
 import DTO.SanPham;
-import util.DBConnection;
+import UTIL.DBConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -28,7 +28,7 @@ public class SanPhamDAO {
                 sp.setThuongHieu(rs.getString("ThuongHieu"));
                 sp.setXuatxu(rs.getString("XuatXu"));
                 sp.setMaLoai(rs.getInt("MaLoai"));
-                sp.setMauSac(rs.getString("MauSac"));
+                sp.setMausac(rs.getString("MauSac"));
                 sp.setDungLuong(rs.getString("DungLuong"));
                 sp.setGiaBan(rs.getDouble("GiaBan"));
                 sp.setSoLuong(rs.getInt("SoLuong"));
@@ -57,7 +57,7 @@ public class SanPhamDAO {
             ps.setString(3, sp.getThuongHieu());
             ps.setString(4, sp.getXuatxu());
             ps.setInt(5, sp.getMaLoai());
-            ps.setString(6, sp.getMauSac());
+            ps.setString(6, sp.getMausac());
             ps.setString(7, sp.getDungLuong());
             ps.setDouble(8, sp.getGiaBan());
             ps.setInt(9, sp.getSoLuong());
@@ -84,7 +84,7 @@ public class SanPhamDAO {
             ps.setString(3, sp.getThuongHieu());
             ps.setString(4, sp.getXuatxu());
             ps.setInt(5, sp.getMaLoai());
-            ps.setString(6, sp.getMauSac());
+            ps.setString(6, sp.getMausac());
             ps.setString(7, sp.getDungLuong());
             ps.setDouble(8, sp.getGiaBan());
             ps.setInt(9, sp.getSoLuong());
@@ -101,7 +101,7 @@ public class SanPhamDAO {
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)){
-            ps.setInt (1,ID);
+            ps.setInt (1,MaSP);
 
             return ps.executeUpdate()>0;}
         catch (SQLException e){
@@ -132,7 +132,7 @@ public class SanPhamDAO {
                     sp.setThuongHieu(rs.getString("ThuongHieu"));
                     sp.setXuatxu(rs.getString("XuatXu"));
                     sp.setMaLoai(rs.getInt("MaLoai"));
-                    sp.setMauSac(rs.getString("MauSac"));
+                    sp.setMausac(rs.getString("MauSac"));
                     sp.setDungLuong(rs.getString("DungLuong"));
                     sp.setGiaBan(rs.getDouble("GiaBan"));
                     sp.setSoLuong(rs.getInt("SoLuong"));
@@ -148,5 +148,34 @@ public class SanPhamDAO {
         return danhsach; 
     }
 
+    public ArrayList<SanPham> selectByID(int ID) {
+        ArrayList<SanPham> list = new ArrayList<>();
+        // SELECT DonGia là DOUBLE, ThanhTien là INT theo cấu trúc DTO.CTHoaDon bạn cung cấp
+        String sql = "SELECT * FROM SanPham WHERE ID = ?";
+        
+        // Sử dụng DataProvider.executeQuery() để thực thi lệnh SELECT
+        try (ResultSet rs = DataProvider.executeQuery(sql, ID)) {
+            
+            while (rs.next()) {
+                SanPham sp = new SanPham();
+                sp.setMaSP(rs.getString("MaSP"));
+                sp.setTenSP(rs.getString("TenSP"));
+                sp.setThuongHieu(rs.getString("ThuongHieu"));
+                sp.setXuatxu(rs.getString("XuatXu"));
+                sp.setMaLoai(rs.getInt("MaLoai"));
+                sp.setMausac(rs.getString("MauSac"));
+                sp.setDungLuong(rs.getString("DungLuong"));
+                sp.setGiaBan(rs.getDouble("GiaBan"));
+                sp.setSoLuong(rs.getInt("SoLuong"));
+                sp.setMoTa(rs.getString("MoTa"));
+
+                list.add(sp);
+            }
+        } catch (SQLException e) {
+            System.err.println("Lỗi DAO khi lấy Sản phẩm ID=" + ID + ": " + e.getMessage());
+            e.printStackTrace();
+        }
+        return list;
+    }
 }
 
