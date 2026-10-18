@@ -1,7 +1,7 @@
 package DAO;
 
 import DTO.SanPham;
-import UTIL.DBConnection;
+import UTIL.DBConnect;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,7 +16,7 @@ public class SanPhamDAO {
         String sql = "SELECT * FROM dbo.SanPham";
 
        
-        try (Connection conn = DBConnection.getConnection();
+        try (Connection conn = DBConnect.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
 
@@ -49,7 +49,7 @@ public class SanPhamDAO {
         String sql = "INSERT INTO dbo.SanPham (MaSP, TenSP, ThuongHieu, XuatXu, MaLoai, MauSac, DungLuong, GiaBan, SoLuong, MoTa) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        try (Connection conn = DBConnection.getConnection();
+        try (Connection conn = DBConnect.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setString(1, sp.getMaSP());
@@ -76,7 +76,7 @@ public class SanPhamDAO {
                 "Xuatxu=?,MaLoai=?,MauSac=?,DungLuong=?," +
                 "GiaBan=?,SoLuong=?,HinhAnh=?,MoTa=? WHERE MaSP=?";
 
-        try (Connection conn = DBConnection.getConnection();
+        try (Connection conn = DBConnect.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setString(1, sp.getMaSP());
@@ -99,7 +99,7 @@ public class SanPhamDAO {
     public boolean xoa(int MaSP){
         String sql="DELETE FROM dbo.SanPham WHERE MaSP=?";
 
-        try (Connection conn = DBConnection.getConnection();
+        try (Connection conn = DBConnect.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)){
             ps.setInt (1,MaSP);
 
@@ -116,7 +116,7 @@ public class SanPhamDAO {
       
         String sql = "SELECT * FROM dbo.SanPham WHERE MaSP LIKE ? OR TenSP LIKE ?";
 
-        try (Connection conn = DBConnection.getConnection();
+        try (Connection conn = DBConnect.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
             String tk = "%" + tukhoa + "%";
