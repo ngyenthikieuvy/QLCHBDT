@@ -6,16 +6,18 @@ public class NhaCungCap {
     private String diaChi;
     private String soDienThoai;
     private String email;
+    private boolean TrangThai;
 
     public NhaCungCap() {
     }
 
-    public NhaCungCap(int maNhaCungCap, String tenNhaCungCap, String diaChi, String soDienThoai, String email) {
+    public NhaCungCap(int maNhaCungCap, String tenNhaCungCap, String diaChi, String soDienThoai, String email, boolean TrangThai) {
         this.maNhaCungCap = maNhaCungCap;
         this.tenNhaCungCap = tenNhaCungCap;
         this.diaChi = diaChi;
         this.soDienThoai = soDienThoai;
         this.email = email;
+        this.TrangThai = TrangThai;
     }
 
     public int getMaNhaCungCap() {
@@ -58,6 +60,14 @@ public class NhaCungCap {
         this.email = email;
     }
 
+    public boolean isTrangThai() {
+        return TrangThai;
+    }
+
+    public void setTrangThai(boolean TrangThai) {
+        this.TrangThai = TrangThai;
+    }
+
     @Override
     public String toString() {
         return "NhaCungCap{" +
@@ -66,6 +76,7 @@ public class NhaCungCap {
                 ", diaChi='" + diaChi + '\'' +
                 ", soDienThoai='" + soDienThoai + '\'' +
                 ", email='" + email + '\'' +
+                ", TrangThai=" + TrangThai +
                 '}';
     }
 }
