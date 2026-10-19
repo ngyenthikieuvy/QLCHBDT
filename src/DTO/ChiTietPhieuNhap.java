@@ -1,8 +1,8 @@
 package DTO;
 
 public class ChiTietPhieuNhap {
-    private String maPhieuNhap; 
-    private String maSanPham;   
+    private int maPhieuNhap; 
+    private int maSanPham;   
     private int soLuong;        
     private double donGia;      
     private double thanhTien;        // Thành tiền (soLuong * donGia)
@@ -10,7 +10,7 @@ public class ChiTietPhieuNhap {
     public ChiTietPhieuNhap() {
     }
 
-    public ChiTietPhieuNhap(String maPhieuNhap, String maSanPham, int soLuong, double donGia) {
+    public ChiTietPhieuNhap(int maPhieuNhap, int maSanPham, int soLuong, double donGia) {
         this.maPhieuNhap = maPhieuNhap;
         this.maSanPham = maSanPham;
         this.soLuong = soLuong;
@@ -18,19 +18,19 @@ public class ChiTietPhieuNhap {
         this.thanhTien = soLuong * donGia; 
     }
 
-    public String getMaPhieuNhap() {
+    public int getMaPhieuNhap() {
         return maPhieuNhap;
     }
 
-    public void setMaPhieuNhap(String maPhieuNhap) {
+    public void setMaPhieuNhap(int maPhieuNhap) {
         this.maPhieuNhap = maPhieuNhap;
     }
 
-    public String getMaSanPham() {
+    public int getMaSanPham() {
         return maSanPham;
     }
 
-    public void setMaSanPham(String maSanPham) {
+    public void setMaSanPham(int maSanPham) {
         this.maSanPham = maSanPham;
     }
 
@@ -59,8 +59,8 @@ public class ChiTietPhieuNhap {
     @Override
     public String toString() {
         return "ChiTietPhieuNhap{" +
-                "maPhieuNhap='" + maPhieuNhap + '\'' +
-                ", maSanPham='" + maSanPham + '\'' +
+                "maPhieuNhap=" + maPhieuNhap +
+                ", maSanPham=" + maSanPham +
                 ", soLuong=" + soLuong +
                 ", donGia=" + donGia +
                 ", thanhTien=" + thanhTien +

@@ -1,7 +1,7 @@
 package DTO;
 
 public class NhaCungCap {
-    private String maNhaCungCap;
+    private int maNhaCungCap;
     private String tenNhaCungCap;
     private String diaChi;
     private String soDienThoai;
@@ -10,7 +10,7 @@ public class NhaCungCap {
     public NhaCungCap() {
     }
 
-    public NhaCungCap(String maNhaCungCap, String tenNhaCungCap, String diaChi, String soDienThoai, String email) {
+    public NhaCungCap(int maNhaCungCap, String tenNhaCungCap, String diaChi, String soDienThoai, String email) {
         this.maNhaCungCap = maNhaCungCap;
         this.tenNhaCungCap = tenNhaCungCap;
         this.diaChi = diaChi;
@@ -18,11 +18,11 @@ public class NhaCungCap {
         this.email = email;
     }
 
-    public String getMaNhaCungCap() {
+    public int getMaNhaCungCap() {
         return maNhaCungCap;
     }
 
-    public void setMaNhaCungCap(String maNhaCungCap) {
+    public void setMaNhaCungCap(int maNhaCungCap) {
         this.maNhaCungCap = maNhaCungCap;
     }
 

@@ -4,9 +4,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class PhieuNhap{
-    private String maPhieuNhap;
-    private String maNhaCungCap;
-    private String maNhanVien;            //Nhân viên phụ trách việc nhập hàng
+    private int maPhieuNhap;
+    private int maNhaCungCap;
+    private int maNhanVien;            //Nhân viên phụ trách việc nhập hàng
     private LocalDate ngayNhap;
     private double TongTien;
     private ArrayList<ChiTietPhieuNhap> danhSachChiTiet;
@@ -16,7 +16,7 @@ public class PhieuNhap{
         this.ngayNhap = LocalDate.now();
     }
     
-    public PhieuNhap(String maPhieuNhap, String maNhaCungCap, String maNhanVien, LocalDate ngayNhap, double TongTien, ArrayList<ChiTietPhieuNhap> danhSachChiTiet){
+    public PhieuNhap(int maPhieuNhap, int maNhaCungCap, int maNhanVien, LocalDate ngayNhap, double TongTien, ArrayList<ChiTietPhieuNhap> danhSachChiTiet){
         this.maPhieuNhap = maPhieuNhap;
         this.maNhaCungCap = maNhaCungCap;
         this.maNhanVien = maNhanVien;
@@ -25,27 +25,27 @@ public class PhieuNhap{
         this.danhSachChiTiet = danhSachChiTiet;
     }
     
-    public String getmaPhieuNhap(){
+    public int getmaPhieuNhap(){
         return maPhieuNhap;
     }
     
-    public void setmaPhieuNhap(String maPhieuNhap){
+    public void setmaPhieuNhap(int maPhieuNhap){
         this.maPhieuNhap = maPhieuNhap;
     }
     
-    public String getmaNhaCungCap(){
+    public int getmaNhaCungCap(){
         return maNhaCungCap;
     }
     
-    public void setmaNhaCungCap(String maNhaCungCap){
+    public void setmaNhaCungCap(int maNhaCungCap){
         this.maNhaCungCap = maNhaCungCap;
     }
     
-    public String getmaNhanVien(){
+    public int getmaNhanVien(){
         return maNhanVien;
     }
     
-    public void setmaNhanVien(String maNhanVien){
+    public void setmaNhanVien(int maNhanVien){
         this.maNhanVien = maNhanVien;
     }
     
@@ -81,11 +81,11 @@ public class PhieuNhap{
     @Override
     public String toString() {
         return "PhieuNhap{" +
-                "maPhieuNhap='" + maPhieuNhap + '\'' +
-                ", maNhaCungCap='" + maNhaCungCap + '\'' +
-                ", maNhanVien='" + maNhanVien + '\'' +
+                "maPhieuNhap=" + maPhieuNhap +
+                ", maNhaCungCap=" + maNhaCungCap +
+                ", maNhanVien=" + maNhanVien +
                 ", ngayNhap=" + ngayNhap +
-                ", tongTien=" + tongTien +
+                ", tongTien=" + TongTien +
                 ", soLuongMatHang=" + this.danhSachChiTiet.size() +
                 '}';
     }
