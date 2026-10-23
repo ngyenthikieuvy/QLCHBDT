@@ -1,71 +1,109 @@
 package DAO;
 
 import DTO.Quyen;
-import UTIL.DBConnect;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-import java.sql.Types;
+import UTIL.DataProvider;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class QuyenDAO {
 
-    // Mỗi cột BIT của PhanQuyen là một quyền, vai trò có quyền khi giá trị cột = 1
-    public List<Quyen> getByVaiTro(String maVaiTro) {
+    private static final String FILE_PHANQUYEN = "PhanQuyen.txt";
+    private static final String FILE_QUYEN = "Quyen.txt";
+
+    // Tên các cột quyền (BIT) trong file PhanQuyen.txt, bắt đầu từ index 2
+    private static final String[] MA_QUYEN = {
+        "NS_XemDanhSach", "NS_Them", "NS_Sua", "NS_Xoa", "NS_DuyetNghi",
+        "NS_ThayDoiChucVu", "NS_TinhLuong", "NS_XemLuongCaNhan", "NS_InBangLuong", "NS_ChamCong",
+        "KHO_XemSanPham", "KHO_ThemSanPham", "KHO_SuaSanPham", "KHO_XoaSanPham",
+        "KHO_NhapHang", "KHO_QuanLyNCC", "KHO_BaoCaoTonKho",
+        "BH_LapPhieuXuat", "BH_ThongKeDoanhThu", "BH_ThongKeLoiNhuan",
+        "PQ_QuanLyPhanQuyen", "ADMIN_BaoCaoTongHop",
+        "QLBanHang", "QLNhapHang", "QLNhanVien", "QLSanPham",
+        "QLKhachHang", "QLKhuyenMai", "QLThongKe"
+    };
+
+    /**
+     * Đọc file Quyen.txt để lấy bảng ánh xạ MaQuyen -> TenQuyen
+     */
+    private Map<String, String> docBangTenQuyen() {
+        Map<String, String> map = new HashMap<>();
+        List<String[]> rows = DataProvider.readAll(FILE_QUYEN);
+        for (String[] row : rows) {
+            // row: [0]MaQuyen, [1]TenQuyen
+            map.put(row[0], row[1]);
+        }
+        return map;
+    }
+
+    /**
+     * Lấy tất cả quyền (cả bật lẫn tắt) từ file Quyen.txt
+     */
+    public List<Quyen> getAll() {
         List<Quyen> list = new ArrayList<>();
-        String sql = "SELECT * FROM dbo.PhanQuyen WHERE MaQuyen = ?";
-        try (Connection conn = DBConnect.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, maVaiTro);
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    ResultSetMetaData md = rs.getMetaData();
-                    for (int i = 1; i <= md.getColumnCount(); i++) {
-                        if (md.getColumnType(i) == Types.BIT && rs.getBoolean(i)) {
-                            String ten = md.getColumnName(i);
-                            list.add(new Quyen(ten, ten));
-                        }
-                    }
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        List<String[]> rows = DataProvider.readAll(FILE_QUYEN);
+        for (String[] row : rows) {
+            list.add(new Quyen(row[0], row[1]));
         }
         return list;
     }
-    // Cập nhật quyền cho vai trò cụ thể
-    public boolean capNhat(String maVaiTro, String tenQuyen, boolean coQuyen) {
-        // Tên cột không thể bind bằng ?, nên chỉ nhận tên có trong PhanQuyen
-        if (!tenQuyen.matches("[A-Za-z_]+") || !tonTaiCot(tenQuyen)) {
-            return false;
+
+    /**
+     * Lấy danh sách quyền được bật (=1) cho một vai trò
+     */
+    public List<Quyen> getByVaiTro(String maVaiTro) {
+        Map<String, String> bangTen = docBangTenQuyen();
+        List<Quyen> list = new ArrayList<>();
+        List<String[]> rows = DataProvider.readAll(FILE_PHANQUYEN);
+        for (String[] row : rows) {
+            if (row[0].equals(maVaiTro)) {
+                // Từ cột index 2 trở đi là các cột quyền BIT
+                for (int i = 0; i < MA_QUYEN.length; i++) {
+                    int colIndex = i + 2; // bỏ qua cột 0 (MaQuyen) và 1 (TenQuyen)
+                    if (colIndex < row.length && "1".equals(row[colIndex])) {
+                        String ma = MA_QUYEN[i];
+                        String ten = bangTen.getOrDefault(ma, ma);
+                        list.add(new Quyen(ma, ten));
+                    }
+                }
+                break;
+            }
         }
-        String sql = "UPDATE dbo.PhanQuyen SET " + tenQuyen + " = ? WHERE MaQuyen = ?";
-        try (Connection conn = DBConnect.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setBoolean(1, coQuyen);
-            ps.setString(2, maVaiTro);
-            return ps.executeUpdate() > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
+        return list;
     }
 
-    private boolean tonTaiCot(String ten) {
-        String sql = "SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('dbo.PhanQuyen') "
-                + "AND name = ? AND system_type_id = 104";
-        try (Connection conn = DBConnect.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, ten);
-            try (ResultSet rs = ps.executeQuery()) {
-                return rs.next();
+    /**
+     * Cập nhật quyền cho vai trò cụ thể
+     */
+    public boolean capNhat(String maVaiTro, String tenQuyen, boolean coQuyen) {
+        // Tìm index của quyền trong mảng MA_QUYEN
+        int quyenIndex = -1;
+        for (int i = 0; i < MA_QUYEN.length; i++) {
+            if (MA_QUYEN[i].equals(tenQuyen)) {
+                quyenIndex = i;
+                break;
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
         }
+        if (quyenIndex == -1) {
+            return false; // Không tìm thấy tên quyền hợp lệ
+        }
+
+        List<String[]> rows = DataProvider.readAll(FILE_PHANQUYEN);
+        boolean found = false;
+        for (String[] row : rows) {
+            if (row[0].equals(maVaiTro)) {
+                int colIndex = quyenIndex + 2;
+                if (colIndex < row.length) {
+                    row[colIndex] = coQuyen ? "1" : "0";
+                    found = true;
+                }
+                break;
+            }
+        }
+        if (found) {
+            DataProvider.writeAll(FILE_PHANQUYEN, rows);
+        }
+        return found;
     }
 }

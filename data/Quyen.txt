@@ -1,0 +1,31 @@
+# MaQuyen|TenQuyen
+NS_XemDanhSach|Xem danh sach nhan vien
+NS_Them|Them nhan vien
+NS_Sua|Sua thong tin nhan vien
+NS_Xoa|Xoa nhan vien
+NS_DuyetNghi|Duyet don nghi phep
+NS_ThayDoiChucVu|Thay doi chuc vu
+NS_TinhLuong|Tinh luong nhan vien
+NS_XemLuongCaNhan|Xem luong ca nhan
+NS_InBangLuong|In bang luong
+NS_ChamCong|Cham cong
+KHO_XemSanPham|Xem san pham
+KHO_ThemSanPham|Them san pham
+KHO_SuaSanPham|Sua san pham
+KHO_XoaSanPham|Xoa san pham
+KHO_NhapHang|Nhap hang
+KHO_QuanLyNCC|Quan ly nha cung cap
+KHO_BaoCaoTonKho|Bao cao ton kho
+BH_LapPhieuXuat|Lap phieu xuat ban
+BH_ThongKeDoanhThu|Thong ke doanh thu
+BH_ThongKeLoiNhuan|Thong ke loi nhuan
+PQ_QuanLyPhanQuyen|Quan ly phan quyen
+ADMIN_BaoCaoTongHop|Bao cao tong hop
+QLBanHang|Quan ly ban hang
+QLNhapHang|Quan ly nhap hang
+QLNhanVien|Quan ly nhan vien
+QLSanPham|Quan ly san pham
+QLKhachHang|Quan ly khach hang
+QLKhuyenMai|Quan ly khuyen mai
+QLThongKe|Quan ly thong ke
+

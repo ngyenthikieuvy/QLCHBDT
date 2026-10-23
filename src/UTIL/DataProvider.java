@@ -35,7 +35,7 @@ public class DataProvider {
         }
         return rows;
     }
-
+    // Ghi tất cả các dòng vào file, ghi đè nếu file đã tồn tại
     public static void writeAll(String fileName, List<String[]> rows) {
         List<String> lines = new ArrayList<>();
         for (String[] row : rows) {
@@ -50,6 +50,7 @@ public class DataProvider {
         }
     }
 
+    // Thêm một dòng vào file, tạo file nếu chưa tồn tại
     public static void append(String fileName, String... row) {
         Path path = Paths.get(DATA_DIR, fileName);
         try {

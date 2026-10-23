@@ -1,52 +1,41 @@
 package DAO;
 
 import DTO.VaiTro;
-import UTIL.DBConnect;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import UTIL.DataProvider;
 import java.util.ArrayList;
 import java.util.List;
 
 public class VaiTroDAO {
 
+    private static final String FILE_NAME = "PhanQuyen.txt";
     private final QuyenDAO quyenDAO = new QuyenDAO();
 
-    // Lấy danh sách tất cả vai trò (kèm quyền)
+    // Format file: MaQuyen|TenQuyen|bit1|bit2|...|bit29
+
+    /**
+     * Lấy danh sách tất cả vai trò (kèm quyền)
+     */
     public List<VaiTro> getAll() {
         List<VaiTro> list = new ArrayList<>();
-        String sql = "SELECT MaQuyen, TenQuyen FROM dbo.PhanQuyen";
-        try (Connection conn = DBConnect.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) {
-            while (rs.next()) {
-                list.add(taoVaiTro(rs.getString("MaQuyen"), rs.getString("TenQuyen")));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        List<String[]> rows = DataProvider.readAll(FILE_NAME);
+        for (String[] row : rows) {
+            String maQuyen = row[0];
+            String tenQuyen = row[1];
+            list.add(new VaiTro(maQuyen, tenQuyen, quyenDAO.getByVaiTro(maQuyen)));
         }
         return list;
     }
 
-    // Lấy vai trò theo mã vai trò (kèm quyền)
+    /**
+     * Lấy vai trò theo mã vai trò (kèm quyền)
+     */
     public VaiTro getById(String maVaiTro) {
-        String sql = "SELECT MaQuyen, TenQuyen FROM dbo.PhanQuyen WHERE MaQuyen = ?";
-        try (Connection conn = DBConnect.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, maVaiTro);
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    return taoVaiTro(rs.getString("MaQuyen"), rs.getString("TenQuyen"));
-                }
+        List<String[]> rows = DataProvider.readAll(FILE_NAME);
+        for (String[] row : rows) {
+            if (row[0].equals(maVaiTro)) {
+                return new VaiTro(row[0], row[1], quyenDAO.getByVaiTro(maVaiTro));
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
         return null;
-    }
-
-    private VaiTro taoVaiTro(String ma, String ten) {
-        return new VaiTro(ma, ten, quyenDAO.getByVaiTro(ma));
     }
 }

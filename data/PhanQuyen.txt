@@ -1,0 +1,6 @@
+# MaQuyen|TenQuyen|NS_XemDanhSach|NS_Them|NS_Sua|NS_Xoa|NS_DuyetNghi|NS_ThayDoiChucVu|NS_TinhLuong|NS_XemLuongCaNhan|NS_InBangLuong|NS_ChamCong|KHO_XemSanPham|KHO_ThemSanPham|KHO_SuaSanPham|KHO_XoaSanPham|KHO_NhapHang|KHO_QuanLyNCC|KHO_BaoCaoTonKho|BH_LapPhieuXuat|BH_ThongKeDoanhThu|BH_ThongKeLoiNhuan|PQ_QuanLyPhanQuyen|ADMIN_BaoCaoTongHop|QLBanHang|QLNhapHang|QLNhanVien|QLSanPham|QLKhachHang|QLKhuyenMai|QLThongKe
+ADMIN|Quan tri vien|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1
+QL_NHANSU|Quan ly nhan su|1|1|1|1|1|1|1|1|1|1|0|0|0|0|0|0|0|0|0|0|0|0|0|0|1|0|0|0|0
+QL_KHO|Quan ly kho|0|0|0|0|0|0|0|1|0|1|1|1|1|1|1|1|1|0|0|0|0|0|0|1|0|1|0|0|0
+QL_KINHDOANH|Quan ly kinh doanh|0|0|0|0|0|0|0|1|0|1|1|0|0|0|0|0|0|1|1|1|0|0|1|0|0|0|1|1|1
+
