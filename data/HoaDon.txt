@@ -1,0 +1,4 @@
+1;1;1;2026-10-24;3.499E7;null;;Da thanh toan
+2;2;2;2026-10-24;3.898E7;null;;Da thanh toan
+3;5;6;2026-10-24;2.699E7;1;;Da thanh toan
+4;7;3;2026-10-24;2.999E7;null;;Da thanh toan
