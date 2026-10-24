@@ -61,13 +61,13 @@ public class MenuDangNhap {
 
         // Chuyen den menu tuong ung theo vai tro
         if (Auth.isAdmin()) {
-            // TODO: new MenuAdmin().hienThi();
+            
             System.out.println("--> Chuyen den Menu Admin (chua lam)");
         } else if (Auth.isQuanLy()) {
-            // TODO: new MenuQuanLy().hienThi();
+            
             System.out.println("--> Chuyen den Menu Quan Ly (chua lam)");
         } else if (Auth.isNhanVien()) {
-            // TODO: new MenuNhanVien().hienThi();
+            
             System.out.println("--> Chuyen den Menu Nhan Vien (chua lam)");
         }
     }
