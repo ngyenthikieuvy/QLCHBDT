@@ -4,16 +4,17 @@ public class TaiKhoan {
     private int maNV;
     private String tenDangNhap;
     private String matKhau;
-    private VaiTro vaiTro;
+    private String vaiTro;      // "ADMIN", "QUANLY", "NHANVIEN"
     private boolean trangThai;
 
     public TaiKhoan() {
     }
 
-    public TaiKhoan(String tenDangNhap, String matKhau, VaiTro vaiTro) {
+    public TaiKhoan(int maNV, String tenDangNhap, String vaiTro, boolean trangThai) {
+        this.maNV = maNV;
         this.tenDangNhap = tenDangNhap;
-        this.matKhau = matKhau;
         this.vaiTro = vaiTro;
+        this.trangThai = trangThai;
     }
 
     public int getMaNV() {
@@ -22,14 +23,6 @@ public class TaiKhoan {
 
     public void setMaNV(int maNV) {
         this.maNV = maNV;
-    }
-
-    public boolean isTrangThai() {
-        return trangThai;
-    }
-
-    public void setTrangThai(boolean trangThai) {
-        this.trangThai = trangThai;
     }
 
     public String getTenDangNhap() {
@@ -48,11 +41,19 @@ public class TaiKhoan {
         this.matKhau = matKhau;
     }
 
-    public VaiTro getVaiTro() {
+    public String getVaiTro() {
         return vaiTro;
     }
 
-    public void setVaiTro(VaiTro vaiTro) {
+    public void setVaiTro(String vaiTro) {
         this.vaiTro = vaiTro;
+    }
+
+    public boolean isTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(boolean trangThai) {
+        this.trangThai = trangThai;
     }
 }

@@ -10,13 +10,9 @@ import java.util.List;
 public class TaiKhoanDAO {
 
     private static final String FILE_NAME = "TaiKhoan.txt";
-    private final VaiTroDAO vaiTroDAO = new VaiTroDAO();
 
-    // Format file: MaNV|TaiKhoan|MatKhau(SHA256 hex)|MaQuyen|TrangThai
+    // Format file: MaNV|TaiKhoan|MatKhau(SHA256)|VaiTro|TrangThai
 
-    /**
-     * Hash mật khẩu bằng SHA-256, trả về chuỗi hex viết hoa
-     */
     private String hashPassword(String password) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
@@ -27,26 +23,26 @@ public class TaiKhoanDAO {
             }
             return sb.toString();
         } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException("SHA-256 không khả dụng", e);
+            throw new RuntimeException("SHA-256 khong kha dung", e);
         }
     }
 
     /**
-     * Trả về TaiKhoan (kèm vai trò và quyền) nếu đúng thông tin và đang hoạt động, ngược lại null
+     * Dang nhap: tra ve TaiKhoan neu dung, null neu sai
      */
     public TaiKhoan dangNhap(String tenDangNhap, String matKhau) {
         String hashedPassword = hashPassword(matKhau);
         List<String[]> rows = DataProvider.readAll(FILE_NAME);
         for (String[] row : rows) {
-            // row: [0]MaNV, [1]TaiKhoan, [2]MatKhau, [3]MaQuyen, [4]TrangThai
+            // row: [0]MaNV, [1]TaiKhoan, [2]MatKhau, [3]VaiTro, [4]TrangThai
             if (row[1].equals(tenDangNhap)
                     && row[2].equalsIgnoreCase(hashedPassword)
                     && "1".equals(row[4])) {
                 TaiKhoan tk = new TaiKhoan();
                 tk.setMaNV(Integer.parseInt(row[0]));
                 tk.setTenDangNhap(row[1]);
+                tk.setVaiTro(row[3]);       // "ADMIN", "QUANLY", "NHANVIEN"
                 tk.setTrangThai(true);
-                tk.setVaiTro(vaiTroDAO.getById(row[3]));
                 return tk;
             }
         }
@@ -54,9 +50,9 @@ public class TaiKhoanDAO {
     }
 
     /**
-     * Đổi mật khẩu cho nhân viên
+     * Doi mat khau
      */
-    public boolean doiMatKhau(int ma NV, String matKhauCu, String matKhauMoi) {
+    public boolean doiMatKhau(int maNV, String matKhauCu, String matKhauMoi) {
         String hashedOld = hashPassword(matKhauCu);
         String hashedNew = hashPassword(matKhauMoi);
 
@@ -77,7 +73,7 @@ public class TaiKhoanDAO {
     }
 
     /**
-     * Kiểm tra tên đăng nhập đã tồn tại chưa
+     * Kiem tra tai khoan da ton tai chua
      */
     public boolean tonTai(String tenDangNhap) {
         List<String[]> rows = DataProvider.readAll(FILE_NAME);
