@@ -1,0 +1,10 @@
+1|Nguyễn Văn|An|Nam|0901111111|1|true
+2|Trần Thị|Bình|Nữ|0902222222|2|true
+3|Lê Văn|Cường|Nam|0903333333|3|true
+4|Phạm Thị|Dung|Nữ|0904444444|4|true
+5|Hoàng Văn|Em|Nam|0905555555|5|true
+6|Võ Thị|Giang|Nữ|0906666666|6|true
+7|Đặng Văn|Hùng|Nam|0907777777|7|true
+8|Bùi Thị|Lan|Nữ|0908888888|8|true
+9|Đỗ Văn|Minh|Nam|0909999999|9|true
+10|Ngô Thị|Ngọc|Nữ|0910000000|10|true

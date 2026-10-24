@@ -1,124 +1,116 @@
 package DAO;
 
 import DTO.NhanVien;
-import UTIL.DBConnect;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import UTIL.DataProvider;
 import java.util.ArrayList;
+import java.util.List;
 
 public class NhanVienDAO {
 
-    //  Lấy danh sách tất cả nhân viên
+    private static final String FILE_NAME = "NhanVien.txt";
+
+    /**
+     * 1. Lấy danh sách tất cả nhân viên từ file NhanVien.txt
+     */
     public ArrayList<NhanVien> layDanhSachNhanVien() {
-        ArrayList<NhanVien> ds = new ArrayList<>();
-        String sql = "SELECT * FROM nhanvien";
+        ArrayList<NhanVien> dsNV = new ArrayList<>();
+        List<String[]> rows = DataProvider.readAll(FILE_NAME);
+        
+        for (String[] row : rows) {
+            // Giả định cấu trúc dòng: 
+            // [0]MaNV, [1]Ho, [2]Ten, [3]GioiTinh, [4]SoDienThoai, [5]MaCV, [6]MaQuyen, [7]TrangThai, [8]TenTaiKhoan
+            if (row.length >= 9) {
+                try {
+                    int maNV = Integer.parseInt(row[0].trim());
+                    String ho = row[1].trim();
+                    String ten = row[2].trim();
+                    String gioiTinh = row[3].trim();
+                    String soDienThoai = row[4].trim();
+                    String maCV = row[5].trim();
+                    boolean trangThai = Boolean.parseBoolean(row[7].trim());
 
-        try (Connection conn = DBConnect.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) {
-
-            while (rs.next()) {
-                NhanVien nv = new NhanVien(
-                    rs.getInt("maNV"),
-                    rs.getString("ho"),
-                    rs.getString("ten"),
-                    rs.getString("gioiTinh"),
-                    rs.getString("soDienThoai"),
-                    rs.getString("maCV"),
-                    rs.getString("maQuyen"),
-                    rs.getBoolean("trangThai"),
-                    rs.getString("tenTaiKhoan")
-                );
-                ds.add(nv);
+                    NhanVien nv = new NhanVien(maNV, ho, ten, gioiTinh, soDienThoai, maCV, trangThai);
+                    dsNV.add(nv);
+                } catch (NumberFormatException e) {
+                    // Bỏ qua dòng lỗi định dạng số nếu có
+                }
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-        return ds;
+        return dsNV;
     }
 
-    //  Thêm nhân viên mới
+    /**
+     * 2. Thêm nhân viên mới vào file
+     */
     public boolean themNhanVien(NhanVien nv) {
-        String sql = "INSERT INTO nhanvien (ho, ten, gioiTinh, soDienThoai, maCV, maQuyen, trangThai, tenTaiKhoan, matKhau) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-        try (Connection conn = DBConnect.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-
-            ps.setString(1, nv.getHo());
-            ps.setString(2, nv.getTen());
-            ps.setString(3, nv.getGioiTinh());
-            ps.setString(4, nv.getSoDienThoai());
-            ps.setString(5, nv.getMaCV());
-            ps.setString(6, nv.getMaQuyen());
-            ps.setBoolean(7, nv.isTrangThai());
-            ps.setString(8, nv.getTenTaiKhoan());
-
-            return ps.executeUpdate() > 0;
-        } catch (SQLException e) {
+        try {
+            String[] row = new String[]{
+                String.valueOf(nv.getMa()),
+                nv.getHo(),
+                nv.getTen(),
+                nv.getGioiTinh(),
+                nv.getSoDienThoai(),
+                nv.getMaCV(),
+                String.valueOf(nv.isTrangThai()),
+            };
+            DataProvider.append(FILE_NAME, row);
+            return true;
+        } catch (Exception e) {
             e.printStackTrace();
+            return false;
         }
-        return false;
     }
 
-    // Sửa thông tin khách hàng 
-    public boolean suaKhachHang(NhanVien nv) {
-        return updateNhanVien(nv); // Gọi lại hàm updateNhanVien để tránh trùng lặp code
-    }
+    /**
+     * 3. Cập nhật thông tin nhân viên
+     */
+    public boolean capNhatNhanVien(NhanVien nv) {
+        List<String[]> rows = DataProvider.readAll(FILE_NAME);
+        boolean found = false;
 
-    // Cập nhật thông tin nhân viên 
-    public boolean updateNhanVien(NhanVien nv) {
-        String sql = "UPDATE nhanvien SET ho = ?, ten = ?, gioiTinh = ?, soDienThoai = ?, maCV = ?, maQuyen = ?, trangThai = ?, tenTaiKhoan = ?, matKhau = ? WHERE maNV = ?";
-
-        try (Connection conn = DBConnect.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-
-            ps.setString(1, nv.getHo());
-            ps.setString(2, nv.getTen());
-            ps.setString(3, nv.getGioiTinh());
-            ps.setString(4, nv.getSoDienThoai());
-            ps.setString(5, nv.getMaCV());
-            ps.setString(6, nv.getMaQuyen());
-            ps.setBoolean(7, nv.isTrangThai());
-            ps.setString(8, nv.getTenTaiKhoan());
-
-            return ps.executeUpdate() > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
+        for (int i = 0; i < rows.size(); i++) {
+            String[] row = rows.get(i);
+            if (row.length > 0 && Integer.parseInt(row[0].trim()) == nv.getMa()) {
+                // Cập nhật lại các trường thông tin
+                rows.set(i, new String[]{
+                    String.valueOf(nv.getMa()),
+                    nv.getHo(),
+                    nv.getTen(),
+                    nv.getGioiTinh(),
+                    nv.getSoDienThoai(),
+                    nv.getMaCV(),
+                    String.valueOf(nv.isTrangThai()),
+                });
+                found = true;
+                break;
+            }
         }
-        return false;
+
+        if (found) {
+            DataProvider.writeAll(FILE_NAME, rows);
+        }
+        return found;
     }
 
-    //  Xóa nhân viên 
+    /**
+     * 4. Xóa nhân viên (Xóa theo mã NV)
+     */
     public boolean xoaNhanVien(int maNV) {
-        String sql = "UPDATE nhanvien SET trangThai = 0 WHERE maNV = ?";
+        List<String[]> rows = DataProvider.readAll(FILE_NAME);
+        boolean found = false;
 
-        try (Connection conn = DBConnect.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-
-            ps.setInt(1, maNV);
-            return ps.executeUpdate() > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
+        for (int i = 0; i < rows.size(); i++) {
+            String[] row = rows.get(i);
+            if (row.length > 0 && Integer.parseInt(row[0].trim()) == maNV) {
+                rows.remove(i);
+                found = true;
+                break;
+            }
         }
-        return false;
-    }
 
-    // Set tên khách hàng 
-    public boolean setTenKhachHang(int maKH, String tenMoi) {
-        String sql = "UPDATE khachhang SET ten = ? WHERE maKH = ?";
-
-        try (Connection conn = DBConnect.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-
-            ps.setString(1, tenMoi);
-            ps.setInt(2, maKH);
-
-            return ps.executeUpdate() > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
+        if (found) {
+            DataProvider.writeAll(FILE_NAME, rows);
         }
-        return false;
+        return found;
     }
 }
