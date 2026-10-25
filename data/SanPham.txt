@@ -1,0 +1,15 @@
+DT01|iPhone 16 Pro Max|Apple|34990000.0|20|iPhone 16 Pro Max 256GB|NCC01|DT|8GB|iOS|4422|6.9|Titan|12 tháng|Xám tự nhiên
+DT02|iPhone 16 Pro|Apple|28990000.0|25|iPhone 16 Pro 128GB|NCC01|DT|8GB|iOS|3577|6.3|Titan|12 tháng|Đen titan
+DT03|iPhone 16|Apple|21990000.0|30|iPhone 16 128GB|NCC01|DT|8GB|iOS|3561|6.1|Nhôm pha kính|12 tháng|Xanh lưu ly
+DT04|iPhone 15|Apple|16990000.0|35|iPhone 15 128GB|NCC01|DT|6GB|iOS|3349|6.1|Nhôm|12 tháng|Hồng
+DT05|Samsung Galaxy S25 Ultra|Samsung|33990000.0|15|Galaxy S25 Ultra 256GB|NCC02|DT|12GB|Android|5000|6.8|Titanium|12 tháng|Xám titan
+DT06|Samsung Galaxy S25+|Samsung|26990000.0|20|Galaxy S25 Plus 256GB|NCC02|DT|12GB|Android|4900|6.7|Nhôm Armor|12 tháng|Đỏ bạc
+DT07|Samsung Galaxy A56|Samsung|10990000.0|40|Galaxy A56 128GB|NCC02|DT|8GB|Android|5000|6.6|Kính lưng nhựa|12 tháng|Đen
+DT08|Xiaomi 15 Ultra|Xiaomi|29990000.0|15|Xiaomi 15 Ultra 512GB|NCC03|DT|16GB|Android|5500|6.73|Gốm cao cấp|12 tháng|Đen
+DT09|Redmi Note 14 Pro|Xiaomi|8990000.0|50|Redmi Note 14 Pro 256GB|NCC03|DT|8GB|Android|5500|6.67|Nhựa nhám|12 tháng|Xanh
+DT10|POCO X7 Pro|Xiaomi|9990000.0|30|POCO X7 Pro 256GB|NCC03|DT|12GB|Android|6000|6.67|Nhựa cứng|12 tháng|Vàng
+DT11|OPPO Reno13|OPPO|15990000.0|25|OPPO Reno13 256GB|NCC04|DT|12GB|Android|5600|6.59|Kính cường lực|12 tháng|Tím
+DT12|OPPO A5 Pro|OPPO|6990000.0|45|OPPO A5 Pro 128GB|NCC04|DT|8GB|Android|5800|6.67|Nhựa|12 tháng|Đen
+DT13|vivo V50|vivo|12990000.0|30|vivo V50 256GB|NCC05|DT|12GB|Android|5500|6.78|Kính nhám|12 tháng|Xanh dương
+DT14|realme 14 Pro+|realme|11990000.0|25|realme 14 Pro Plus 256GB|NCC06|DT|12GB|Android|5200|6.7|Da sinh học|12 tháng|Xanh lá
+DT15|HONOR 400 Pro|HONOR|17990000.0|20|HONOR 400 Pro 512GB|NCC07|DT|12GB|Android|5300|6.78|Kính cong|12 tháng|Bạc
