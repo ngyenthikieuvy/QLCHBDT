@@ -61,13 +61,13 @@ public class MenuDangNhap {
 
         // Chuyen den menu tuong ung theo vai tro
         if (Auth.isAdmin()) {
-            
+            // Cái này sẽ chuyển đến menu dành cho Admin, sẽ bổ sung sau
             System.out.println("--> Chuyen den Menu Admin (chua lam)");
         } else if (Auth.isQuanLy()) {
-            
+            // Cái này sẽ chuyển đến menu dành cho Quan Ly, sẽ bổ sung sau
             System.out.println("--> Chuyen den Menu Quan Ly (chua lam)");
         } else if (Auth.isNhanVien()) {
-            
+            // Cái này sẽ chuyển đến menu dành cho Nhan Vien, sẽ bổ sung sau
             System.out.println("--> Chuyen den Menu Nhan Vien (chua lam)");
         }
     }
